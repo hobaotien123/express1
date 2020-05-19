@@ -24,6 +24,10 @@ db.defaults({ users: [] })
   .write();
 
 
+/////// dùng shortid ////////
+var shortid = require('shortid');
+
+
 app.get('/',function(req,res){
 	res.render('index.pug');
 });
@@ -49,8 +53,26 @@ app.get('/users/create',function(req,res){
 	res.render('users/create.pug');
 })
 
+app.get('/users/:id',function(req,res){
+	var id = parseInt(req.params.id);
+	var user = db.get('users').find({ id : id }).value();
+	res.render('users/view.pug',{
+		user : user
+	})
+})
+
 app.post('/users/create', function(req,res){
+	req.body.id = shortid.generate();
 	db.get('users').push(req.body).write();
+	res.redirect('/users');
+})
+
+app.get('/users/delete/:id',function(req,res){
+	var id = req.params.id;
+	console.log(typeof id);
+	var user = db.get('users').find({ id : id }).value();
+	console.log(user);
+	db.get('users').remove(user).write();
 	res.redirect('/users');
 })
 
