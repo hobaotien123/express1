@@ -1,18 +1,21 @@
-h1 Danh sách sinh viên 
-a(href="/users/create") Creat new student
-form(action="/users/search",method="GET")
-	input(type=text , name="q")
-	button Search
-ul
-	each user in users
-		li
-			span= user.name
-			span &nbsp
-			a(href='/users/' + user.id ) View
-			label 
+extends ../layouts/common.pug
+
+block content	
+	h1 Danh sách sinh viên 
+	a(href="/users/create") Creat new student
+	form(action="/users/search",method="GET",class="form-group d-flex")
+		input(type=text , name="q",class="")
+		button(class="btn btn-warning") Search
+	ul
+		each user in users
+			li
+				span= user.name
 				span &nbsp
-				span &nbsp
-				a(href='/users/delete/' + user.id)  Xoá
-			label
-				a(href='/users/edit/' + user.id) Sửa
+				a(href='/users/' + user.id ) View
+				label 
+					span &nbsp
+					span &nbsp
+					a(href='/users/delete/' + user.id)  Xoá
+				label
+					a(href='/users/edit/' + user.id) Sửa
 			
