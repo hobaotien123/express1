@@ -30,6 +30,9 @@ app.get('/',function(req,res){
 
 app.use('/users', useRoutes);
 
+app.use(express.static('public'))
+
+
 // app.get('/users',function(req,res){
 // 	res.render('users/users.pug',{
 // 		users: db.get('users').value()
