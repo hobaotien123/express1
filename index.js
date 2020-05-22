@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-
 /////// dùng shortid ////////
 var shortid = require('shortid');
 
-
+//// dùng Route ..
 var useRoutes = require('./routes/user.route.js');
 
 

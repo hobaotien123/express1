@@ -1,14 +1,6 @@
 {
   "users": [
     {
-      "name": "Tiến",
-      "id": "5gpbvi620"
-    },
-    {
-      "name": "Tân",
-      "id": "t2-S0yDs7"
-    },
-    {
       "name": "Thành",
       "id": "mR3n3W1kV"
     },
@@ -19,6 +11,10 @@
     {
       "name": "Châu Quang",
       "id": "Z6bCvO6uP"
+    },
+    {
+      "name": "Hihi",
+      "id": "UF_BJ57KG"
     }
   ]
 }
