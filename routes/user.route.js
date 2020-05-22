@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 /// dùng controller ///
-var controller = require('../controllers/user.controller.js')
-
+var controller = require('../controllers/user.controller.js');
+var validateUsers = require('../validate/validate.users.js');
 /// dùng lowdb //////
 var db = require('../db.js');
 
@@ -18,7 +18,7 @@ router.get('/create', controller.create );
 
 router.get('/:id', controller.view );
 
-router.post('/create', controller.postCreate );	
+router.post('/create', validateUsers.postValidateUser, controller.postCreate );	
 
 router.get('/delete/:id', controller.delete );
 

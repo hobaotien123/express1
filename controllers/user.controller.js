@@ -24,19 +24,19 @@ module.exports.create = function(req,res){
 
 module.exports.postCreate = function(req,res){
 	req.body.id = shortid.generate();
-	var errors = [];
-	if(!req.body.name){
-		errors.push('Name is not define');
-	}
-	if(req.body.name.length > 30){
-		errors.push('Name is not 30 ');
-	}
-	if(errors.length){
-		res.render('users/create.pug',{
-			errors : errors
-		});
-		return;
-	}
+	// var errors = [];
+	// if(!req.body.name){
+	// 	errors.push('Name is not define');
+	// }
+	// if(req.body.name.length > 30){
+	// 	errors.push('Name is not 30 ');
+	// }
+	// if(errors.length){
+	// 	res.render('users/create.pug',{
+	// 		errors : errors
+	// 	});
+	// 	return;
+	// }
 
 	db.get('users').push(req.body).write();
 	res.redirect('/users');
