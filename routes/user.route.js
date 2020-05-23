@@ -12,6 +12,11 @@ var shortid = require('shortid');
 
 router.get('/', controller.index );
 
+router.get('/cookies', function(req,res,next) {
+	res.cookie('userid',1234)
+	res.send('Hello Bảo Tiến');
+})
+
 router.get('/search', controller.search ); 
 
 router.get('/create', controller.create );
