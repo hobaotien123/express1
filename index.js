@@ -22,18 +22,22 @@ var shortid = require('shortid');
 
 //// dùng Route ..
 var useRoutes = require('./routes/user.route.js');
-
+var useAuthentic = require('./routes/authentic.route.js');
 /// dùng cookie-parser ///
-var cookieParser = require('cookie-parser')
+var cookieParser = require('cookie-parser');
 app.use(cookieParser())
 
+//// dùng midllewareAuthentic ///
 
+var authenticMidlleware = require('./middlewares/authentic.middleware.js');
 
 app.get('/',function(req,res){
 	res.render('index.pug');
 });
 
-app.use('/users', useRoutes);
+app.use('/users', authenticMidlleware.requireAuth, useRoutes);
+
+app.use('/login', useAuthentic);
 
 app.use(express.static('public'))
 

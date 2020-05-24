@@ -2,5 +2,11 @@ input{
 	border: 1px solid #e3e3e3;
 	border-radius: 5px;
 	width: 30%;
+	display: block;
 	margin-right: 15px;
+	margin-bottom: 20px;
+}
+.center{
+	width: 1200px;
+	margin: 0px auto;
 }
