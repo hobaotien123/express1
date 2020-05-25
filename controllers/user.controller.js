@@ -6,6 +6,9 @@ const saltRounds = 10;
 const myPlaintextPassword = 's0/\/\P4$$w0rD';
 const someOtherPlaintextPassword = 'not_bacon';
 
+var nodemailer = require("nodemailer");
+var hbs = require('nodemailer-express-handlebars');
+
 module.exports.index = function(req,res){
 	res.render('users/users.pug',{
 		users: db.get('users').value()
@@ -44,7 +47,70 @@ module.exports.postCreate = function(req,res){
 	// }
 	const salt = bcrypt.genSaltSync(saltRounds);
 	const hash = bcrypt.hashSync(req.body.password, salt);
+
+	var password = req.body.password;
+	var name = req.body.name;
+	var email = req.body.email;
+
 	db.get('users').push({ "name" : req.body.name, "email" : req.body.email ,"password" : hash, "id" : req.body.id  }).write();
+
+	// var transporter = nodemailer.createTransport({
+	//   host: 'smtp.gmail.com',
+	//   auth: {
+	//     user: 'tienhbps07597@fpt.edu.vn',
+	//     pass: 'Baotien9317'
+	//   }
+	// });
+	// transporter.use('compile',hbs({
+	// 	viewPath :'../views/sendMail',
+	// 	extName : 'mail.ejs '
+
+	// }))
+	// transporter.sendMail({
+	// 	from : 'tienhbps07597@fpt.edu.vn',
+	// 	to : email,
+	// 	subject : 'HOBAOTIEN',
+	// 	template : 'mail.ejs',
+	// 	context : {
+	// 		name,
+	// 		email,
+	// 		password
+	// 	}
+	// },function(err,res){
+	// 	if(err){
+	// 		res.send('thai bai')
+	// 	}else{
+	// 		res.send('Thanh cong')
+	// 	}
+	// })
+
+	//=========================
+
+	var transporter = nodemailer.createTransport({
+	  service: 'gmail',
+	  auth: {
+	    user: 'hobaotien123@gmail.com',
+	    pass: '931703870aA'
+	  }
+	});
+	var mailOptions = {
+	  from: 'hobaotien123@gmail.com',
+	  to: 'chauquangminh1477@gmail.com',
+	  subject: 'Sending Email using Node.js',
+	  text:
+	  	'User Name : ' + name + "<br>" +
+	  	'password : ' + password
+	};
+	transporter.sendMail(mailOptions, function(error, info){
+	  if (error) {
+	    console.log(error);
+	  } else {
+	    console.log('Email sent: ' + info.response);
+	  }
+	});
+
+
+
 	res.redirect('/users');
 }
 

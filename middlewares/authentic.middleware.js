@@ -4,7 +4,6 @@ module.exports.requireAuth = function (req,res,next) {
 		res.redirect('/login');
 		return;
 	}
-	console.log(req.signedCookies);
 	var cookieDb = db.get('cookies').find({ cookieId: req.cookies.userId }).value();
 	if (!cookieDb) {
 		db.get('cookies').push({ cookieId: req.cookies.userId, count: 1 }).write();
