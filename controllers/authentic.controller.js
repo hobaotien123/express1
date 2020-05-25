@@ -1,11 +1,11 @@
 var db = require('../db.js');
-var md5 = require('md5');
+// var md5 = require('md5');
 
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
-const myPlaintextPassword = 's0/\/\P4$$w0rD';
-const someOtherPlaintextPassword = 'not_bacon';
-const salt = bcrypt.genSaltSync(saltRounds);
+// const saltRounds = 10;
+// const myPlaintextPassword = 's0/\/\P4$$w0rD';
+// const someOtherPlaintextPassword = 'not_bacon';
+// // const salt = bcrypt.genSaltSync(saltRounds);
 
 module.exports.login = function (req,res,next) {
 	res.render('../views/users/login.pug');
@@ -48,7 +48,9 @@ module.exports.postLogin = function(req,res,next){
 	// 	return;
 	// }
 	
-	res.cookie('userId',user.id);
+	res.cookie('userId',user.id,{
+		signed : true
+	});
 
 	res.redirect('/users');
 }

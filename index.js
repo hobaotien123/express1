@@ -25,7 +25,7 @@ var useRoutes = require('./routes/user.route.js');
 var useAuthentic = require('./routes/authentic.route.js');
 /// dùng cookie-parser ///
 var cookieParser = require('cookie-parser');
-app.use(cookieParser())
+app.use(cookieParser('gasdqw1241fasd12312412asd'))
 
 //// dùng midllewareAuthentic ///
 

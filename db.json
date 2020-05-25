@@ -1,19 +1,6 @@
 {
   "cookies": [
     {
-      "cookieId": "-3dQXhXQm",
-      "count": 4
-    },
-    {
-      "cookieId": "tdPQKSrFV",
-      "count": 10
-    },
-    {
-      "cookieId": "WBMfAjm7R",
-      "count": 31
-    },
-    {
-      "cookieId": "ddhxwlQ1p",
       "count": 1
     }
   ],
@@ -23,6 +10,12 @@
       "email": "hobaotien123@gmail.com",
       "password": "$2b$10$WxzYdNQe2VXx4ECbKy442eRafpaxj4f2lbjXyBB5tMEu2xoFTqRaG",
       "id": "ddhxwlQ1p"
+    },
+    {
+      "name": "Châu Quang",
+      "email": "chauquang@gmail.com",
+      "password": "$2b$10$0gmBlN3IJCeyL.FFpwnLouaZ9Dp0Rw90dmN9UTeT.IW.LBjpFQVIO",
+      "id": "ZPSBbac4_"
     }
   ]
 }
