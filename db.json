@@ -1,46 +1,28 @@
 {
+  "cookies": [
+    {
+      "cookieId": "-3dQXhXQm",
+      "count": 4
+    },
+    {
+      "cookieId": "tdPQKSrFV",
+      "count": 10
+    },
+    {
+      "cookieId": "WBMfAjm7R",
+      "count": 31
+    },
+    {
+      "cookieId": "ddhxwlQ1p",
+      "count": 1
+    }
+  ],
   "users": [
     {
-      "name": "Thành",
-      "id": "mR3n3W1kV"
-    },
-    {
-      "name": "Nam",
-      "id": "JuWfbwcZc"
-    },
-    {
-      "name": "Châu Quang",
-      "id": "Z6bCvO6uP"
-    },
-    {
-      "name": "Hihi",
-      "id": "UF_BJ57KG"
-    },
-    {
-      "name": "Thành",
-      "id": "cfbnxoavF"
-    },
-    {
-      "name": "s",
-      "id": "56sXy5-Iu"
-    },
-    {
       "name": "Hồ Bảo Tiến",
-      "id": "-3dQXhXQm",
       "email": "hobaotien123@gmail.com",
-      "password": "123123"
-    },
-    {
-      "name": "a",
-      "id": "D1P53F9Iv"
-    },
-    {
-      "name": "aa",
-      "id": "h2-oNjAfQ"
-    },
-    {
-      "name": "a",
-      "id": "E9EBuP8G6"
+      "password": "$2b$10$WxzYdNQe2VXx4ECbKy442eRafpaxj4f2lbjXyBB5tMEu2xoFTqRaG",
+      "id": "ddhxwlQ1p"
     }
   ]
 }

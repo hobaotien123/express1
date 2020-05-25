@@ -1,6 +1,10 @@
 var db = require('../db.js');
 var shortid = require('shortid');
 
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const myPlaintextPassword = 's0/\/\P4$$w0rD';
+const someOtherPlaintextPassword = 'not_bacon';
 
 module.exports.index = function(req,res){
 	res.render('users/users.pug',{
@@ -38,8 +42,9 @@ module.exports.postCreate = function(req,res){
 	// 	});
 	// 	return;
 	// }
-
-	db.get('users').push(req.body).write();
+	const salt = bcrypt.genSaltSync(saltRounds);
+	const hash = bcrypt.hashSync(req.body.password, salt);
+	db.get('users').push({ "name" : req.body.name, "email" : req.body.email ,"password" : hash, "id" : req.body.id  }).write();
 	res.redirect('/users');
 }
 
@@ -64,7 +69,6 @@ module.exports.edit = function(req,res){
 	})
 }
 module.exports.postEdit = function(req,res){
-	console.log(req.body);
 	var id = req.params.id;
 	db.get('users').find({ id : id })
 	.assign({ name : req.body.name })

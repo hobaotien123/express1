@@ -1,4 +1,11 @@
 var db = require('../db.js');
+var md5 = require('md5');
+
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const myPlaintextPassword = 's0/\/\P4$$w0rD';
+const someOtherPlaintextPassword = 'not_bacon';
+const salt = bcrypt.genSaltSync(saltRounds);
 
 module.exports.login = function (req,res,next) {
 	res.render('../views/users/login.pug');
@@ -16,7 +23,8 @@ module.exports.postLogin = function(req,res,next){
 		});
 		return;
 	}
-	if(user.password !== password){
+	var isCorrect = bcrypt.compareSync(req.body.password,user.password);
+	if (!isCorrect){
 		res.render('../views/users/login.pug',{
 			errors : [
 				'Pass!'
@@ -25,7 +33,22 @@ module.exports.postLogin = function(req,res,next){
 		});
 		return;
 	}
+ 
 
+		
+	// var hashPassword = md5(password)
+
+	// if(user.password !== hash){
+	// 	res.render('../views/users/login.pug',{
+	// 		errors : [
+	// 			'Pass!'
+	// 		],
+	// 		values : req.body
+	// 	});
+	// 	return;
+	// }
+	
 	res.cookie('userId',user.id);
+
 	res.redirect('/users');
 }

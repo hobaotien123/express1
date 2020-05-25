@@ -35,9 +35,9 @@ app.get('/',function(req,res){
 	res.render('index.pug');
 });
 
-app.use('/users', authenticMidlleware.requireAuth, useRoutes);
-
-app.use('/login', useAuthentic);
+app.use('/users', authenticMidlleware.requireAuth , useRoutes);
+// 
+app.use('/login',  useAuthentic);
 
 app.use(express.static('public'))
 
