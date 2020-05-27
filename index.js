@@ -31,6 +31,9 @@ app.use(cookieParser('gasdqw1241fasd12312412asd'))
 
 var authenticMidlleware = require('./middlewares/authentic.middleware.js');
 
+var useProduct = require('./routes/product.route.js');
+
+
 app.get('/',function(req,res){
 	res.render('index.pug');
 });
@@ -38,6 +41,8 @@ app.get('/',function(req,res){
 app.use('/users', authenticMidlleware.requireAuth , useRoutes);
 // 
 app.use('/login',  useAuthentic);
+
+app.use('/product',  useProduct);
 
 app.use(express.static('public'))
 

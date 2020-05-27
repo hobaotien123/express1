@@ -1,0 +1,22 @@
+extends ../layouts/common.pug
+block content	
+	.row(style="margin : 0")
+		.col-lg-12
+			ul.nav
+				li.nav-item
+					a(href="#").nav-link.active Active
+				li.nav-item
+					a(href="#").nav-link.active Active
+				li.nav-item
+					a(href="#").nav-link.active Active
+				li.nav-item
+					a(href="#").nav-link.active Active
+	.row(style="margin : 0;margin-top : 50px")
+		each product in products
+			.col-lg-3.cold-md-4.col-sm-12.col-xs-12
+				.card(style="height : 450px;margin-bottom : 20px")
+					img(src=product.image).card-img-top
+					.card-body
+						h5.card-title= product.name
+						p.card-text= product.desciption
+						a(href="#").btn.btn-primary Add to card
