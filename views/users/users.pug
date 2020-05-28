@@ -10,6 +10,8 @@ block content
 		each user in users
 			li
 				span= user.name
+				img(style="width : 30px",src=user.avatar)
+				p=user.email
 				span &nbsp
 				a(href='/users/' + user.id ) View
 				label 

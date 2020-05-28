@@ -10,6 +10,11 @@ var db = require('../db.js');
 /////// dùng shortid ////////
 var shortid = require('shortid');
 
+//// dùng muler để upload file trong form //
+var multer  = require('multer')
+var upload = multer({ dest: './public/uploads/' })
+
+
 router.get('/', controller.index );
 
 router.get('/cookies', function(req,res,next) {
@@ -23,7 +28,7 @@ router.get('/create', controller.create );
 
 router.get('/:id', controller.view );
 
-router.post('/create', validateUsers.postValidateUser, controller.postCreate );	
+router.post('/create', upload.single('avatar'),  validateUsers.postValidateUser, controller.postCreate );	
 
 router.get('/delete/:id', controller.delete );
 

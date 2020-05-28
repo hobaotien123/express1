@@ -32,6 +32,8 @@ module.exports.create = function(req,res){
 
 module.exports.postCreate = function(req,res){
 	req.body.id = shortid.generate();
+	const fileUrl = '/uploads/' + req.file.filename;
+
 	// var errors = [];
 	// if(!req.body.name){
 	// 	errors.push('Name is not define');
@@ -48,11 +50,11 @@ module.exports.postCreate = function(req,res){
 	const salt = bcrypt.genSaltSync(saltRounds);
 	const hash = bcrypt.hashSync(req.body.password, salt);
 
-	var password = req.body.password;
+	req.body.password = hash
 	var name = req.body.name;
 	var email = req.body.email;
-
-	db.get('users').push({ "name" : req.body.name, "email" : req.body.email ,"password" : hash, "id" : req.body.id  }).write();
+	req.body.avatar = fileUrl // cho nao xu li file dau ban  
+	db.get('users').push(req.body).write();
 
 	// var transporter = nodemailer.createTransport({
 	//   host: 'smtp.gmail.com',
@@ -86,28 +88,28 @@ module.exports.postCreate = function(req,res){
 
 	//=========================
 
-	var transporter = nodemailer.createTransport({
-	  service: 'gmail',
-	  auth: {
-	    user: 'hobaotien123@gmail.com',
-	    pass: '931703870aA'
-	  }
-	});
-	var mailOptions = {
-	  from: 'hobaotien123@gmail.com',
-	  to: 'chauquangminh1477@gmail.com',
-	  subject: 'Sending Email using Node.js',
-	  text:
-	  	'User Name : ' + name + "<br>" +
-	  	'password : ' + password
-	};
-	transporter.sendMail(mailOptions, function(error, info){
-	  if (error) {
-	    console.log(error);
-	  } else {
-	    console.log('Email sent: ' + info.response);
-	  }
-	});
+	// var transporter = nodemailer.createTransport({
+	//   service: 'gmail',
+	//   auth: {
+	//     user: 'hobaotien123@gmail.com',
+	//     pass: '931703870aA'
+	//   }
+	// });
+	// var mailOptions = {
+	//   from: 'hobaotien123@gmail.com',
+	//   to: 'chauquangminh1477@gmail.com',
+	//   subject: 'Sending Email using Node.js',
+	//   text:
+	//   	'User Name : ' + name + "<br>" +
+	//   	'password : ' + password
+	// };
+	// transporter.sendMail(mailOptions, function(error, info){
+	//   if (error) {
+	//     console.log(error);
+	//   } else {
+	//     console.log('Email sent: ' + info.response);
+	//   }
+	// });
 
 
 

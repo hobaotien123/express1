@@ -20,3 +20,17 @@ block content
 						h5.card-title= product.name
 						p.card-text= product.desciption
 						a(href="#").btn.btn-primary Add to card
+	.row(style="margin : 0;margin-top : 50px")
+		.col-lg-12
+			nav
+				- 	var n = 1;
+				ul.pagination
+					li.page-item
+						a.page-link(href="/product?page=" ) Next
+					while n <= pagination
+						li.page-item
+							a.page-link(href="/product?page=" + n )= n++
+					li.page-item
+						a.page-link(href="/product?page=" + (n-1)) Pre
+						
+

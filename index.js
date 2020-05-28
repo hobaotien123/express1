@@ -26,6 +26,7 @@ var useAuthentic = require('./routes/authentic.route.js');
 /// dùng cookie-parser ///
 var cookieParser = require('cookie-parser');
 app.use(cookieParser('gasdqw1241fasd12312412asd'))
+app.use(express.static('public'))
 
 //// dùng midllewareAuthentic ///
 
@@ -38,13 +39,13 @@ app.get('/',function(req,res){
 	res.render('index.pug');
 });
 
-app.use('/users', authenticMidlleware.requireAuth , useRoutes);
+app.use('/users', useRoutes);
 // 
 app.use('/login',  useAuthentic);
 
 app.use('/product',  useProduct);
 
-app.use(express.static('public'))
+
 
 
 // app.get('/users',function(req,res){
