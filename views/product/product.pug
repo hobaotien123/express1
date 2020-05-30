@@ -10,7 +10,9 @@ block content
 				li.nav-item
 					a(href="#").nav-link.active Active
 				li.nav-item
-					a(href="#").nav-link.active Active
+					a(href="#").nav-link.active Giỏ hàng
+				li.nav-item
+					a(href="#").nav-link.active= cart
 	.row(style="margin : 0;margin-top : 50px")
 		each product in products
 			.col-lg-3.cold-md-4.col-sm-12.col-xs-12
@@ -19,7 +21,7 @@ block content
 					.card-body
 						h5.card-title= product.name
 						p.card-text= product.desciption
-						a(href="#").btn.btn-primary Add to card
+						a(href="/cart/add/" + product.id).btn.btn-primary Add to card
 	.row(style="margin : 0;margin-top : 50px")
 		.col-lg-12
 			nav

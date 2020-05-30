@@ -50,7 +50,8 @@ module.exports.postCreate = function(req,res){
 	const salt = bcrypt.genSaltSync(saltRounds);
 	const hash = bcrypt.hashSync(req.body.password, salt);
 
-	req.body.password = hash
+	req.body.password = hash;
+	var password = req.body.password;
 	var name = req.body.name;
 	var email = req.body.email;
 	req.body.avatar = fileUrl // cho nao xu li file dau ban  
@@ -97,11 +98,11 @@ module.exports.postCreate = function(req,res){
 	// });
 	// var mailOptions = {
 	//   from: 'hobaotien123@gmail.com',
-	//   to: 'chauquangminh1477@gmail.com',
+	//   to: email,
 	//   subject: 'Sending Email using Node.js',
 	//   text:
 	//   	'User Name : ' + name + "<br>" +
-	//   	'password : ' + password
+	//   	'password : ' + req.body.password
 	// };
 	// transporter.sendMail(mailOptions, function(error, info){
 	//   if (error) {
