@@ -7,6 +7,13 @@ var port = 3000;
 app.set('view engine', 'pug')
 app.set('views', './views')
 
+/// dùng mogonose
+
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/express-demo',{useNewUrlParser: true});
+
+
+
 //// dùng req.body lấy dữ liệu từ client người dùng gửi lên server
 const bodyParser = require('body-parser')
 app.use(bodyParser.json()) // for parsing application/json
@@ -46,8 +53,8 @@ app.get('/',function(req,res){
 
 app.use(sessionMiddleware);
 
-app.use('/users',authenticMidlleware, useRoutes);
-// 
+app.use('/users' ,authenticMidlleware ,  useRoutes);
+ //  
 app.use('/login',useAuthentic);
 
 app.use('/product',useProduct);

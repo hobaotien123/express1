@@ -1,6 +1,9 @@
 var db = require('../db.js');
 var shortid = require('shortid');
 
+var User = require('../models/user.model.js');
+
+
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const myPlaintextPassword = 's0/\/\P4$$w0rD';
@@ -9,18 +12,26 @@ const someOtherPlaintextPassword = 'not_bacon';
 var nodemailer = require("nodemailer");
 var hbs = require('nodemailer-express-handlebars');
 
-module.exports.index = function(req,res){
+module.exports.index = async function(req,res){
+	// res.render('users/users.pug',{
+	// 	users: db.get('users').value()
+	// });
+	var users = await User.find();
 	res.render('users/users.pug',{
-		users: db.get('users').value()
-	});
+		users : users
+	})
 }
 
-module.exports.search = function(req,res){
+module.exports.search = async function(req,res){
 	var q = req.query.q;
 
-	var matchedUsers = db.get('users').value().filter(function(user){
+	// var matchedUsers = db.get('users').value().filter(function(user){
+	// 	return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
+	// });
+	var users = await User.find();
+	var matchedUsers = users.filter(function(user){
 		return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
-	});
+	})
 	res.render('users/users.pug',{
 		users : matchedUsers
 	})
@@ -30,7 +41,7 @@ module.exports.create = function(req,res){
 	res.render('users/create.pug');
 }
 
-module.exports.postCreate = function(req,res){
+module.exports.postCreate = async function(req,res){
 	req.body.id = shortid.generate();
 	const fileUrl = '/uploads/' + req.file.filename;
 
@@ -55,7 +66,13 @@ module.exports.postCreate = function(req,res){
 	var name = req.body.name;
 	var email = req.body.email;
 	req.body.avatar = fileUrl // cho nao xu li file dau ban  
-	db.get('users').push(req.body).write();
+	var user = await new User(req.body).save();
+	console.log(user);
+		
+	//// tạo document trong table ko dùng await
+	// User.create(req.body)
+	// .then(function (jawbreaker) {
+	// })
 
 	// var transporter = nodemailer.createTransport({
 	//   host: 'smtp.gmail.com',
@@ -119,29 +136,56 @@ module.exports.postCreate = function(req,res){
 
 module.exports.view = function(req,res){
 	var id = req.params.id;
-	var user = db.get('users').find({ id : id }).value();
-	res.render('users/view.pug',{
-		user: user
-	})
+	User.findById(id,function(err,user){
+		if(err){
+			console.log(err);
+		}else{
+			res.render('users/view.pug',{
+				user: user
+			})
+		}
+	});
+	
+	// var user = db.get('users').find({ id : id }).value();
+	// res.render('users/view.pug',{
+	// 	user: user
+	// })
 }
 module.exports.delete = function(req,res){
 	var id = req.params.id;
-	var user = db.get('users').find({ id : id }).value();
-	db.get('users').remove(user).write();
-	res.redirect('/users');
+	User.findByIdAndRemove(id)
+	.then(function(user){
+		res.redirect('/users');
+	})
+
+
+	// var user = db.get('users').find({ id : id }).value();
+	// db.get('users').remove(user).write();
+	// res.redirect('/users');
 };
 module.exports.edit = function(req,res){
 	var id = req.params.id;
-	var user = db.get('users').find({ id : id }).value();
-	res.render('users/edit.pug',{
-		user: user
+	User.findById(id)
+	.then(function(user){
+		res.render('users/edit.pug',{
+			user: user
+		})
 	})
+	// var user = db.get('users').find({ id : id }).value();
+	// res.render('users/edit.pug',{
+	// 	user: user
+	// })
 }
 module.exports.postEdit = function(req,res){
 	var id = req.params.id;
-	db.get('users').find({ id : id })
-	.assign({ name : req.body.name })
-	.write()
-	res.redirect('/users');
+	User.findByIdAndUpdate(id,{name : req.body.name})
+	.then(function(){
+		res.redirect('/users');
+	})
+
+	// db.get('users').find({ id : id })
+	// .assign({ name : req.body.name })
+	// .write()
+	// res.redirect('/users');
 	
 }

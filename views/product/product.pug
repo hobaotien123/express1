@@ -12,6 +12,7 @@ block content
 				li.nav-item
 					a(href="#").nav-link.active Giỏ hàng
 				li.nav-item
+				if cart
 					a(href="#").nav-link.active= cart
 	.row(style="margin : 0;margin-top : 50px")
 		each product in products

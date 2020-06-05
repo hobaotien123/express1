@@ -1,5 +1,7 @@
-var db = require('../db.js');
+// var db = require('../db.js');
 // var md5 = require('md5');
+var User = require('../models/user.model.js');
+
 
 const bcrypt = require('bcrypt');
 // const saltRounds = 10;
@@ -10,10 +12,15 @@ const bcrypt = require('bcrypt');
 module.exports.login = function (req,res,next) {
 	res.render('../views/users/login.pug');
 }
-module.exports.postLogin = function(req,res,next){
+module.exports.postLogin = async function(req,res){
 	var email = req.body.email;
 	var password = req.body.password;
-	var user = db.get('users').find({ email : email }).value();
+
+	var user = await User.findOne({email : email});
+	console.log(user);
+	
+	// db.get('users').find({ email : email }).value();
+	
 	if(!user){
 		res.render('../views/users/login.pug',{
 			errors : [
