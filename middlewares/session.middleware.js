@@ -7,10 +7,11 @@ module.exports = async function(req,res,next){
 		res.cookie('sessionId', sessionId ,{
 			signed : true
 		});
-		var sessionId = await Session({sessionId : sessionId}).save();
+		var sessionIdNew = await Session.create({sessionId : sessionId });
 		// db.get('session').push({
 		// 	id : sessionId
 		// }).write();
 	}
+
 	next();
 }

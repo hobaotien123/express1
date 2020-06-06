@@ -1,5 +1,6 @@
 // var db = require('../db.js')
 var Session = require('../models/session.model.js');
+// relative path, absolute path
 // var Product = require('../models/product.model.js');
 
 module.exports.addToCart = async function(req,res) {
@@ -15,7 +16,7 @@ module.exports.addToCart = async function(req,res) {
 			[path]: 1
 		} 
 	});
-	console.log(countCart);
+	console.log(countCart); // 
 	// var addCart  = await Session.findOneAndUpdate({sessionId : sessionId },{$inc: { [path]: 1 } });
 
 	// db.get('session').find({ id : sessionId  })

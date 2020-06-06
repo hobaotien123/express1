@@ -60,14 +60,14 @@ module.exports.postCreate = async function(req,res){
 	// }
 	const salt = bcrypt.genSaltSync(saltRounds);
 	const hash = bcrypt.hashSync(req.body.password, salt);
-
+	var cata = 12;
 	req.body.password = hash;
 	var password = req.body.password;
 	var name = req.body.name;
 	var email = req.body.email;
 	req.body.avatar = fileUrl // cho nao xu li file dau ban  
+	req.body.cata = cata;
 	var user = await new User(req.body).save();
-	console.log(user);
 		
 	//// tạo document trong table ko dùng await
 	// User.create(req.body)
